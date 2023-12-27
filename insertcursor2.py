@@ -1,0 +1,19 @@
+import arcpy
+import os
+
+gdb_path = r"D:\Programming for GIS-3\P6_Working_with_Cursor_2\Practical_5_6_ProProject\05_06_Working_with_Cursors.gdb"
+fc_name = "MajorAttractions"
+
+fc_path = os.path.join(gdb_path, fc_name)
+fields_list = ["Name", "ESTAB", "ADDR"]
+
+record = ("NEWATTRACTION", 2003, "STREET123")
+
+records_list = [("NEWATTRACTION", 2003, "STREET123"), ("NEW_ATTRACTION_2", 2003, "STREET21"), ("attr", 2025, "Katraj")]
+
+i_cursor = arcpy.da.InsertCursor(fc_path, fields_list)
+
+for record in records_list:
+    i_cursor.insertRow(record)
+
+print("Process Completed")
